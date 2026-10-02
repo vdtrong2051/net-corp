@@ -9,20 +9,14 @@ export function ManagerDashboard() {
   const dashboard = managerDashboardMock;
 
   return (
-    <PageContainer
-      title={dashboard.title}
-      description={dashboard.description}
-    >
+    <PageContainer title={dashboard.title} description={dashboard.description}>
       <div className="flex flex-col gap-6">
         <section
           aria-label="Chỉ số vận hành"
           className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4"
         >
           {dashboard.kpis.map((kpi) => (
-            <DashboardKpiCard
-              key={kpi.id}
-              kpi={kpi}
-            />
+            <DashboardKpiCard key={kpi.id} kpi={kpi} />
           ))}
         </section>
 
@@ -31,10 +25,7 @@ export function ManagerDashboard() {
             aria-label={dashboard.primaryQueue.title}
             className="min-w-0"
           >
-            <DashboardWorkQueue
-              queue={dashboard.primaryQueue}
-              maxItems={6}
-            />
+            <DashboardWorkQueue queue={dashboard.primaryQueue} maxItems={6} />
           </section>
 
           <aside className="grid min-w-0 content-start gap-6">
@@ -46,9 +37,7 @@ export function ManagerDashboard() {
             ) : null}
 
             {dashboard.recentActivity?.length ? (
-              <DashboardActivity
-                items={dashboard.recentActivity}
-              />
+              <DashboardActivity items={dashboard.recentActivity} />
             ) : null}
           </aside>
         </div>
@@ -59,11 +48,7 @@ export function ManagerDashboard() {
             className="grid min-w-0 gap-6 lg:grid-cols-2"
           >
             {dashboard.secondaryQueues.map((queue) => (
-              <DashboardWorkQueue
-                key={queue.id}
-                queue={queue}
-                maxItems={5}
-              />
+              <DashboardWorkQueue key={queue.id} queue={queue} maxItems={5} />
             ))}
           </section>
         ) : null}

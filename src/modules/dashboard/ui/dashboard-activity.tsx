@@ -1,12 +1,7 @@
 import Link from "next/link";
 import { Activity } from "lucide-react";
 
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { DashboardActivityItem } from "@/modules/dashboard/model/dashboard.types";
 import { StatusBadge } from "@/shared/ui/feedback/status-badge";
 
@@ -14,11 +9,7 @@ type DashboardActivityProps = {
   items: DashboardActivityItem[];
 };
 
-function ActivityContent({
-  item,
-}: {
-  item: DashboardActivityItem;
-}) {
+function ActivityContent({ item }: { item: DashboardActivityItem }) {
   return (
     <>
       <div className="bg-muted flex size-9 shrink-0 items-center justify-center rounded-full">
@@ -27,15 +18,10 @@ function ActivityContent({
 
       <div className="min-w-0 flex-1">
         <div className="flex flex-wrap items-center gap-2">
-          <p className="text-sm font-medium">
-            {item.title}
-          </p>
+          <p className="text-sm font-medium">{item.title}</p>
 
           {item.tone ? (
-            <StatusBadge
-              tone={item.tone}
-              className="px-1.5 py-0"
-            >
+            <StatusBadge tone={item.tone} className="px-1.5 py-0">
               {item.time}
             </StatusBadge>
           ) : null}
@@ -48,18 +34,14 @@ function ActivityContent({
         ) : null}
 
         {!item.tone ? (
-          <p className="text-muted-foreground mt-1 text-xs">
-            {item.time}
-          </p>
+          <p className="text-muted-foreground mt-1 text-xs">{item.time}</p>
         ) : null}
       </div>
     </>
   );
 }
 
-export function DashboardActivity({
-  items,
-}: DashboardActivityProps) {
+export function DashboardActivity({ items }: DashboardActivityProps) {
   return (
     <Card>
       <CardHeader>

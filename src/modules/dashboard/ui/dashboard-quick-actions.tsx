@@ -2,21 +2,14 @@ import Link from "next/link";
 import { Plus } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { DashboardQuickAction } from "@/modules/dashboard/model/dashboard.types";
 
 type DashboardQuickActionsProps = {
   actions: DashboardQuickAction[];
 };
 
-export function DashboardQuickActions({
-  actions,
-}: DashboardQuickActionsProps) {
+export function DashboardQuickActions({ actions }: DashboardQuickActionsProps) {
   return (
     <Card>
       <CardHeader>

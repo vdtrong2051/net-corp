@@ -1,16 +1,9 @@
 import type { AppRole } from "@/shared/types/role";
 
 export type DashboardTone =
-  | "neutral"
-  | "pending"
-  | "success"
-  | "warning"
-  | "danger"
-  | "info";
+  "neutral" | "pending" | "success" | "warning" | "danger" | "info";
 
-export type DashboardKpiFormat =
-  | "number"
-  | "currency";
+export type DashboardKpiFormat = "number" | "currency";
 
 export type DashboardKpi = {
   id: string;

@@ -22,9 +22,7 @@ export function DashboardWorkQueue({
   maxItems,
 }: DashboardWorkQueueProps) {
   const visibleItems =
-    typeof maxItems === "number"
-      ? queue.items.slice(0, maxItems)
-      : queue.items;
+    typeof maxItems === "number" ? queue.items.slice(0, maxItems) : queue.items;
 
   return (
     <Card>
@@ -32,9 +30,7 @@ export function DashboardWorkQueue({
         <CardTitle>{queue.title}</CardTitle>
 
         {queue.description ? (
-          <CardDescription>
-            {queue.description}
-          </CardDescription>
+          <CardDescription>{queue.description}</CardDescription>
         ) : null}
       </CardHeader>
 
@@ -52,9 +48,7 @@ export function DashboardWorkQueue({
               >
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
-                    <p className="font-medium">
-                      {item.title}
-                    </p>
+                    <p className="font-medium">{item.title}</p>
 
                     <StatusBadge tone={item.statusTone}>
                       {item.status}
@@ -78,9 +72,7 @@ export function DashboardWorkQueue({
                             {detail.label}:
                           </span>
 
-                          <span>
-                            {detail.value}
-                          </span>
+                          <span>{detail.value}</span>
                         </div>
                       ))}
                     </div>
@@ -95,11 +87,7 @@ export function DashboardWorkQueue({
                         </span>
                       ) : null}
 
-                      {item.deadline ? (
-                        <span>
-                          Hạn: {item.deadline}
-                        </span>
-                      ) : null}
+                      {item.deadline ? <span>Hạn: {item.deadline}</span> : null}
                     </div>
                   ) : null}
                 </div>

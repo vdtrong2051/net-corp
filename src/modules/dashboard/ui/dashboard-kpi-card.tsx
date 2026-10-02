@@ -1,12 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import type {
   DashboardKpi,
@@ -39,19 +34,17 @@ function formatKpiValue(kpi: DashboardKpi) {
   return new Intl.NumberFormat("vi-VN").format(kpi.value);
 }
 
-export function DashboardKpiCard({
-  kpi,
-}: DashboardKpiCardProps) {
+export function DashboardKpiCard({ kpi }: DashboardKpiCardProps) {
   const tone = kpi.tone ?? "neutral";
 
   return (
     <Link
       href={kpi.href}
-      className="block rounded-xl focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+      className="focus-visible:ring-ring/50 block rounded-xl focus-visible:ring-3 focus-visible:outline-none"
     >
       <Card
         className={cn(
-          "h-full border-l-4 transition-colors hover:bg-muted/30",
+          "hover:bg-muted/30 h-full border-l-4 transition-colors",
           toneStyles[tone]
         )}
       >

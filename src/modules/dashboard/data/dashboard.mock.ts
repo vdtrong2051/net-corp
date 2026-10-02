@@ -16,8 +16,7 @@ import type {
 const staffReturnedQueue: DashboardQueue = {
   id: "staff-returned-enrollments",
   title: "Hồ sơ bị trả lại",
-  description:
-    "Các hồ sơ cần sửa trước khi gửi quản lý kiểm tra lại.",
+  description: "Các hồ sơ cần sửa trước khi gửi quản lý kiểm tra lại.",
   emptyMessage: "Không có hồ sơ nào bị trả lại.",
   items: [
     {
@@ -79,8 +78,7 @@ const staffReturnedQueue: DashboardQueue = {
 const staffPaymentQueue: DashboardQueue = {
   id: "staff-payment-fixes",
   title: "Thanh toán cần bổ sung",
-  description:
-    "Các giao dịch hoặc minh chứng cần được nhân viên cập nhật.",
+  description: "Các giao dịch hoặc minh chứng cần được nhân viên cập nhật.",
   emptyMessage: "Không có thanh toán nào cần bổ sung.",
   items: [
     {
@@ -119,8 +117,7 @@ const staffPaymentQueue: DashboardQueue = {
 const staffIncompleteQueue: DashboardQueue = {
   id: "staff-incomplete-enrollments",
   title: "Hồ sơ chưa hoàn tất",
-  description:
-    "Các hồ sơ đang được tạo nhưng chưa sẵn sàng gửi duyệt.",
+  description: "Các hồ sơ đang được tạo nhưng chưa sẵn sàng gửi duyệt.",
   emptyMessage: "Không có hồ sơ đang dang dở.",
   items: [
     {
@@ -160,8 +157,7 @@ export const staffDashboardMock: DashboardData = {
   role: "STAFF",
 
   title: "Dashboard Nhân viên",
-  description:
-    "Theo dõi các hồ sơ và công việc cần xử lý của bạn.",
+  description: "Theo dõi các hồ sơ và công việc cần xử lý của bạn.",
 
   kpis: [
     {
@@ -204,10 +200,7 @@ export const staffDashboardMock: DashboardData = {
 
   primaryQueue: staffReturnedQueue,
 
-  secondaryQueues: [
-    staffPaymentQueue,
-    staffIncompleteQueue,
-  ],
+  secondaryQueues: [staffPaymentQueue, staffIncompleteQueue],
 
   quickActions: [
     {
@@ -257,8 +250,7 @@ export const staffDashboardMock: DashboardData = {
 const managerReviewQueue: DashboardQueue = {
   id: "manager-review-queue",
   title: "Hồ sơ chờ duyệt",
-  description:
-    "Ưu tiên các hồ sơ đã chờ lâu nhất.",
+  description: "Ưu tiên các hồ sơ đã chờ lâu nhất.",
   emptyMessage: "Không có hồ sơ nào đang chờ duyệt.",
   items: [
     {
@@ -324,8 +316,7 @@ const managerReviewQueue: DashboardQueue = {
 const managerPaymentQueue: DashboardQueue = {
   id: "manager-payment-review",
   title: "Thanh toán chờ kiểm tra",
-  description:
-    "Các giao dịch đã có chứng từ và đang chờ xác nhận.",
+  description: "Các giao dịch đã có chứng từ và đang chờ xác nhận.",
   emptyMessage: "Không có thanh toán đang chờ kiểm tra.",
   items: [
     {
@@ -364,8 +355,7 @@ const managerPaymentQueue: DashboardQueue = {
 const managerExceptionQueue: DashboardQueue = {
   id: "manager-exceptions",
   title: "Ngoại lệ cần xử lý",
-  description:
-    "Các trường hợp cần quyết định của quản lý.",
+  description: "Các trường hợp cần quyết định của quản lý.",
   emptyMessage: "Không có ngoại lệ cần xử lý.",
   items: [
     {
@@ -405,8 +395,7 @@ export const managerDashboardMock: DashboardData = {
   role: "MANAGER",
 
   title: "Dashboard Quản lý",
-  description:
-    "Theo dõi hàng đợi duyệt và các điểm nghẽn trong quy trình.",
+  description: "Theo dõi hàng đợi duyệt và các điểm nghẽn trong quy trình.",
 
   kpis: [
     {
@@ -449,10 +438,7 @@ export const managerDashboardMock: DashboardData = {
 
   primaryQueue: managerReviewQueue,
 
-  secondaryQueues: [
-    managerPaymentQueue,
-    managerExceptionQueue,
-  ],
+  secondaryQueues: [managerPaymentQueue, managerExceptionQueue],
 
   summary: [
     {
@@ -554,8 +540,7 @@ export const ownerDashboardMock: DashboardData = {
   primaryQueue: {
     id: "owner-operation-attention",
     title: "Vận hành cần chú ý",
-    description:
-      "Các điểm nghẽn hiện tại trong quy trình trung tâm.",
+    description: "Các điểm nghẽn hiện tại trong quy trình trung tâm.",
     emptyMessage: "Không có vấn đề vận hành cần chú ý.",
     items: [
       {
@@ -667,17 +652,12 @@ export const ownerDashboardMock: DashboardData = {
   ],
 };
 
-export const dashboardMockByRole: Record<
-  AppRole,
-  DashboardData
-> = {
+export const dashboardMockByRole: Record<AppRole, DashboardData> = {
   STAFF: staffDashboardMock,
   MANAGER: managerDashboardMock,
   OWNER: ownerDashboardMock,
 };
 
-export function getDashboardMock(
-  role: AppRole
-): DashboardData {
+export function getDashboardMock(role: AppRole): DashboardData {
   return dashboardMockByRole[role];
 }

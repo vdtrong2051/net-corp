@@ -9,20 +9,14 @@ export function OwnerDashboard() {
   const dashboard = ownerDashboardMock;
 
   return (
-    <PageContainer
-      title={dashboard.title}
-      description={dashboard.description}
-    >
+    <PageContainer title={dashboard.title} description={dashboard.description}>
       <div className="flex flex-col gap-6">
         <section
           aria-label="Chỉ số tổng quan"
           className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4"
         >
           {dashboard.kpis.map((kpi) => (
-            <DashboardKpiCard
-              key={kpi.id}
-              kpi={kpi}
-            />
+            <DashboardKpiCard key={kpi.id} kpi={kpi} />
           ))}
         </section>
 
@@ -31,10 +25,7 @@ export function OwnerDashboard() {
             aria-label={dashboard.primaryQueue.title}
             className="min-w-0"
           >
-            <DashboardWorkQueue
-              queue={dashboard.primaryQueue}
-              maxItems={6}
-            />
+            <DashboardWorkQueue queue={dashboard.primaryQueue} maxItems={6} />
           </section>
 
           <aside className="grid min-w-0 content-start gap-6">
@@ -46,9 +37,7 @@ export function OwnerDashboard() {
             ) : null}
 
             {dashboard.recentActivity?.length ? (
-              <DashboardActivity
-                items={dashboard.recentActivity}
-              />
+              <DashboardActivity items={dashboard.recentActivity} />
             ) : null}
           </aside>
         </div>
