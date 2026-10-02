@@ -9,7 +9,7 @@ export default function Home() {
         <h1 className="text-3xl font-bold">NET CORP</h1>
 
         <p className="text-muted-foreground">
-          Internal Enrollment Management System
+          NET CORP Enrollment Management System
         </p>
 
         <Button>
