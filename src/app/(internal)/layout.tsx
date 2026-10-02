@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Toaster } from "@/components/ui/sonner";
+
 import { AppShell } from "@/shared/ui/layout/app-shell";
 
 type InternalLayoutProps = {

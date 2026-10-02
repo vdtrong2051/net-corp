@@ -48,11 +48,7 @@ export function ConfirmDialog({
           <AlertDialogCancel>{cancelText}</AlertDialogCancel>
 
           <AlertDialogAction
-            className={
-              destructive
-                ? "bg-destructive text-destructive-foreground hover:bg-destructive/90"
-                : undefined
-            }
+            variant={destructive ? "destructive" : "default"}
             onClick={onConfirm}
           >
             {confirmText}
