@@ -2,10 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Building2, ChevronUp, User2 } from "lucide-react";
-
-import { getNavigationForRole } from "@/shared/config/navigation";
-import type { AppRole } from "@/shared/types/role";
+import { Building2 } from "lucide-react";
 
 import {
   Sidebar,
@@ -20,12 +17,14 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
+import { getNavigationForRole } from "@/shared/config/navigation";
+import { useMockSession } from "@/shared/providers/mock-session-provider";
 
 export function AppSidebar() {
   const pathname = usePathname();
+  const { user, role } = useMockSession();
 
-  const demoRole: AppRole = "STAFF";
-  const visibleNavigation = getNavigationForRole(demoRole);
+  const visibleNavigation = getNavigationForRole(role);
 
   return (
     <Sidebar variant="inset" collapsible="icon">
@@ -43,6 +42,7 @@ export function AppSidebar() {
 
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">NET CORP</span>
+
                 <span className="text-muted-foreground truncate text-xs">
                   Enrollment System
                 </span>
@@ -74,6 +74,7 @@ export function AppSidebar() {
                         tooltip={item.title}
                       >
                         <Icon />
+
                         <span>{item.title}</span>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
@@ -88,19 +89,21 @@ export function AppSidebar() {
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton size="lg">
-              <div className="bg-muted flex size-8 items-center justify-center rounded-full">
-                <User2 className="size-4" />
+            <SidebarMenuButton
+              size="lg"
+              tooltip={`${user.name} · ${user.roleLabel}`}
+            >
+              <div className="bg-muted flex size-8 shrink-0 items-center justify-center rounded-full text-xs font-medium">
+                {user.initials}
               </div>
 
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">Nguyễn Văn Demo</span>
+                <span className="truncate font-medium">{user.name}</span>
+
                 <span className="text-muted-foreground truncate text-xs">
-                  Nhân viên
+                  {user.roleLabel}
                 </span>
               </div>
-
-              <ChevronUp className="ml-auto size-4" />
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

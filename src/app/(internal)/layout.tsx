@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 
+import { MockSessionProvider } from "@/shared/providers/mock-session-provider";
+import { MockAccessGate } from "@/shared/ui/auth/mock-access-gate";
 import { AppShell } from "@/shared/ui/layout/app-shell";
 
 type InternalLayoutProps = {
@@ -7,5 +9,11 @@ type InternalLayoutProps = {
 };
 
 export default function InternalLayout({ children }: InternalLayoutProps) {
-  return <AppShell>{children}</AppShell>;
+  return (
+    <MockSessionProvider>
+      <AppShell>
+        <MockAccessGate>{children}</MockAccessGate>
+      </AppShell>
+    </MockSessionProvider>
+  );
 }
