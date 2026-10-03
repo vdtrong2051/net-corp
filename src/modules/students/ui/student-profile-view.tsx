@@ -23,6 +23,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+import { usePaymentMockStore } from "@/modules/payments/service/payment-mock-store";
+import { StudentPaymentLifecycle } from "@/modules/payments/ui/student-payment-lifecycle";
+
 import type {
   EnrollmentHistoryStatus,
   ProgramCode,
@@ -30,11 +34,12 @@ import type {
   StudentSourceCategory,
   StudentStatus,
 } from "@/modules/students/model/student.types";
+
 import { StudentAuditHistory } from "@/modules/students/ui/student-audit-history";
 import { StudentContractHistory } from "@/modules/students/ui/student-contract-history";
 import { StudentCourseHistory } from "@/modules/students/ui/student-course-history";
 import { StudentEnrollmentHistory } from "@/modules/students/ui/student-enrollment-history";
-import { StudentPaymentHistory } from "@/modules/students/ui/student-payment-history";
+
 import {
   StatusBadge,
   type StatusTone,
@@ -43,40 +48,55 @@ import { PageContainer } from "@/shared/ui/layout/page-container";
 
 const programLabels: Record<ProgramCode, string> = {
   NET_HSK: "NET HSK",
+
   NET_ENGLISH: "NET English",
 };
 
 const sourceLabels: Record<StudentSourceCategory, string> = {
   MARKETING: "Marketing",
+
   EXTERNAL_RELATIONS: "Đối ngoại",
+
   SELF_SOURCED: "Tự kiếm",
 };
 
 const studentStatusLabels: Record<StudentStatus, string> = {
   ACTIVE: "Đang hoạt động",
+
   INACTIVE: "Ngừng hoạt động",
 };
 
 const studentStatusTones: Record<StudentStatus, StatusTone> = {
   ACTIVE: "success",
+
   INACTIVE: "neutral",
 };
 
 const enrollmentStatusLabels: Record<EnrollmentHistoryStatus, string> = {
   DRAFT: "Bản nháp",
+
   SUBMITTED: "Chờ duyệt",
+
   RETURNED: "Bị trả lại",
+
   APPROVED: "Đã duyệt",
+
   COMPLETED: "Hoàn tất",
+
   CANCELLED: "Đã hủy",
 };
 
 const enrollmentStatusTones: Record<EnrollmentHistoryStatus, StatusTone> = {
   DRAFT: "neutral",
+
   SUBMITTED: "pending",
+
   RETURNED: "danger",
+
   APPROVED: "success",
+
   COMPLETED: "success",
+
   CANCELLED: "neutral",
 };
 
@@ -108,6 +128,7 @@ function getLatestEnrollment(profile: StudentProfile360) {
 
 type InfoItemProps = {
   label: string;
+
   value?: string;
 };
 
@@ -123,7 +144,9 @@ function InfoItem({ label, value }: InfoItemProps) {
 
 type ProfileMetricProps = {
   label: string;
+
   value: string | number;
+
   description: string;
 };
 
@@ -150,6 +173,21 @@ type StudentProfileViewProps = {
 export function StudentProfileView({ profile }: StudentProfileViewProps) {
   const { student } = profile;
 
+  /*
+   * GĐ7.9:
+   * Payment metric và Payment tab không
+   * còn dùng profile.payments legacy.
+   */
+  const { payments } = usePaymentMockStore();
+
+  const studentPayments = payments.filter(
+    (payment) => payment.studentId === student.id
+  );
+
+  const confirmedPaymentTotal = studentPayments
+    .filter((payment) => payment.status === "CONFIRMED")
+    .reduce((total, payment) => total + payment.amount, 0);
+
   const latestEnrollment = getLatestEnrollment(profile);
 
   const latestPrograms = latestEnrollment
@@ -159,10 +197,6 @@ export function StudentProfileView({ profile }: StudentProfileViewProps) {
         )
       )
     : [];
-
-  const confirmedPaymentTotal = profile.payments
-    .filter((payment) => payment.status === "CONFIRMED")
-    .reduce((total, payment) => total + payment.amount, 0);
 
   return (
     <PageContainer
@@ -211,7 +245,7 @@ export function StudentProfileView({ profile }: StudentProfileViewProps) {
           <ProfileMetric
             label="Đã xác nhận"
             value={formatCurrency(confirmedPaymentTotal)}
-            description="Thanh toán đã được xác nhận"
+            description="Tính từ Payment CONFIRMED của GĐ7"
           />
 
           <ProfileMetric
@@ -238,7 +272,7 @@ export function StudentProfileView({ profile }: StudentProfileViewProps) {
 
               <TabsTrigger value="payments">
                 <WalletCards />
-                Thanh toán ({profile.payments.length})
+                Thanh toán ({studentPayments.length})
               </TabsTrigger>
 
               <TabsTrigger value="contracts">
@@ -463,7 +497,7 @@ export function StudentProfileView({ profile }: StudentProfileViewProps) {
           </TabsContent>
 
           <TabsContent value="payments" className="mt-4">
-            <StudentPaymentHistory profile={profile} />
+            <StudentPaymentLifecycle studentId={student.id} />
           </TabsContent>
 
           <TabsContent value="contracts" className="mt-4">
