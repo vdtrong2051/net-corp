@@ -13,4 +13,7 @@ export const routeLabels: Record<string, string> = {
   courses: "Khóa học",
   users: "Tài khoản",
   settings: "Cài đặt",
+
+  create: "Tạo mới",
+  edit: "Tiếp tục",
 };
